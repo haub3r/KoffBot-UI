@@ -1,26 +1,45 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Button, makeStyles } from "@material-ui/core";
+import React, { useState } from "react";
+import Statistics from "./Statistics";
+import Mousetrap from "mousetrap";
 
-function App() {
+const useStyles = makeStyles((theme) => ({
+  topButton: {
+    position: "absolute",
+    right: "2em",
+  },
+  koffContainer: {
+    marginBottom: "1em",
+  },
+}));
+
+const App = () => {
+  const classes = useStyles();
+  const [isOnDarkMode, setIsOnDarkMode] = useState(false);
+  const [darkModeText, setDarkModeText] = useState("Dark Mode");
+  const [koffString, setKoffString] = useState("");
+  const toggleDarkMode = () => {
+    setIsOnDarkMode(!isOnDarkMode);
+    setDarkModeText(isOnDarkMode ? "Dark Mode" : "Light Mode");
+  };
+  Mousetrap.bind("d", toggleDarkMode);
+  Mousetrap.bind("k", () => {
+    setKoffString(koffString + " 🍺 ");
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className={classes.koffContainer}>{koffString}</div>
+      <Button
+        className={classes.topButton}
+        variant="contained"
+        color="secondary"
+        onClick={toggleDarkMode}
+      >
+        {darkModeText}
+      </Button>
+      <Statistics isOnDarkMode={isOnDarkMode}></Statistics>
+    </>
   );
-}
+};
 
 export default App;
