@@ -16,7 +16,7 @@ const QueryGetStats = (): QueryResults => {
   const getStats = async () => {
     console.log("Fetching fresh data from server...");
     const res = await axios.get(
-      "https://koffbot-dev.azurewebsites.net/api/koffbotstats"
+      "https://koffbot.azurewebsites.net/api/koffbotstats"
     );
     console.log("Response from KoffBotStats:", res);
 
