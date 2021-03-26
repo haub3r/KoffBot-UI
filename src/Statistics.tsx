@@ -1,5 +1,13 @@
-import { Box, Button, Container, makeStyles, Theme } from "@material-ui/core";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Container,
+  makeStyles,
+  Theme,
+} from "@material-ui/core";
 import logo from "./koff.png";
+import QueryGetStats, { QueryResults } from "./Queries";
 
 interface Props {
   isOnDarkMode: boolean;
@@ -40,6 +48,15 @@ const useStyles = makeStyles<Theme, Props>(() => ({
 
 const Statistics = (props: Props) => {
   const classes = useStyles(props);
+
+  const query = QueryGetStats() as QueryResults;
+  const data = query.data;
+  const refetch = query.refetch;
+
+  const refresh = () => {
+    refetch();
+  };
+
   return (
     <Container className={classes.mainContainer}>
       <div className={classes.mainHeader}>KoffBot Portal 🍻</div>
@@ -47,16 +64,19 @@ const Statistics = (props: Props) => {
       {/* <div style={{ fontSize: "1.5em", marginBottom: "1em" }}>🍺</div> */}
       <h2>Statistics:</h2>
       <div className={classes.subHeader}>Times toasted:</div>
-      <div className={classes.number}>123</div>
+      <div className={classes.number}>
+        {!data ? <CircularProgress /> : data.toastCount}
+      </div>
       <div className={classes.subHeader}>Fridays hailed:</div>
-      <div className={classes.number}>12323</div>
-      <div className={classes.subHeader}>Uptime:</div>
-      <div className={classes.number}>123</div>
+      <div className={classes.number}>
+        {!data ? <CircularProgress /> : data.fridayCount}
+      </div>
       <Box>
         <Button
           className={classes.rowButton}
           variant="contained"
           color="primary"
+          onClick={refresh}
         >
           Refresh
         </Button>

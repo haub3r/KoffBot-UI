@@ -2,6 +2,7 @@ import { Button, makeStyles } from "@material-ui/core";
 import React, { useState } from "react";
 import Statistics from "./Statistics";
 import Mousetrap from "mousetrap";
+import { QueryClient, QueryClientProvider } from "react-query";
 
 const useStyles = makeStyles((theme) => ({
   topButton: {
@@ -26,8 +27,10 @@ const App = () => {
   Mousetrap.bind("k", () => {
     setKoffString(koffString + " 🍺 ");
   });
+
+  const queryClient = new QueryClient();
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <div className={classes.koffContainer}>{koffString}</div>
       <Button
         className={classes.topButton}
@@ -38,7 +41,7 @@ const App = () => {
         {darkModeText}
       </Button>
       <Statistics isOnDarkMode={isOnDarkMode}></Statistics>
-    </>
+    </QueryClientProvider>
   );
 };
 
