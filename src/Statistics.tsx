@@ -7,7 +7,7 @@ import {
   Theme,
 } from "@material-ui/core";
 import logo from "./koff.png";
-import QueryGetStats, { QueryResults } from "./Queries";
+import QueryGetStats, { StatsQueryResults } from "./Queries";
 
 interface Props {
   isOnDarkMode: boolean;
@@ -49,7 +49,7 @@ const useStyles = makeStyles<Theme, Props>(() => ({
 const Statistics = (props: Props) => {
   const classes = useStyles(props);
 
-  const query = QueryGetStats() as QueryResults;
+  const query = QueryGetStats() as StatsQueryResults;
   const data = query.data;
   const refetch = query.refetch;
 

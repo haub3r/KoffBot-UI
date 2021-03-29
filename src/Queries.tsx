@@ -7,18 +7,18 @@ export interface StatsDTO {
   fridayCount: number;
 }
 
-export interface QueryResults {
+export interface StatsQueryResults {
   data: StatsDTO | undefined;
   refetch: () => Promise<QueryObserverResult>;
 }
 
-const QueryGetStats = (): QueryResults => {
+const endpointUrl = "https://koffbot.azurewebsites.net/api/koffbotstats";
+
+const QueryGetStats = (): StatsQueryResults => {
   const getStats = async () => {
     console.log("Fetching fresh data from server...");
-    const res = await axios.get(
-      "https://koffbot.azurewebsites.net/api/koffbotstats"
-    );
-    console.log("Response from KoffBotStats:", res);
+    const res = await axios.get(endpointUrl);
+    console.log("Response from " + endpointUrl + ":", res);
 
     return res.data;
   };
@@ -28,7 +28,7 @@ const QueryGetStats = (): QueryResults => {
   return data;
 };
 
-const GetOnce = (callback: QueryFunction<StatsDTO>): QueryResults => {
+const GetOnce = (callback: QueryFunction<StatsDTO>): StatsQueryResults => {
   const [enabled, setEnabled] = useState(true);
 
   const { isLoading, data, refetch } = useQuery("statistics", callback, {
