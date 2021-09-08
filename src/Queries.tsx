@@ -5,6 +5,7 @@ import { QueryFunction, QueryObserverResult, useQuery } from "react-query";
 export interface StatsDTO {
   toastCount: number;
   fridayCount: number;
+  drunkCount: number;
 }
 
 export interface StatsQueryResults {

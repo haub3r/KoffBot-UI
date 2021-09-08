@@ -17,7 +17,7 @@ const useStyles = makeStyles<Theme, Props>(() => ({
   mainContainer: {
     minHeight: "20em",
     padding: "1em",
-    paddingBottom: "30em",
+    paddingBottom: "25em",
     backgroundColor: (props) => (props.isOnDarkMode ? "black" : "white"),
     color: (props) => (props.isOnDarkMode ? "white" : "black"),
     textAlign: "center",
@@ -60,7 +60,7 @@ const Statistics = (props: Props) => {
   return (
     <Container className={classes.mainContainer}>
       <div className={classes.mainHeader}>KoffBot Portal 🍻</div>
-      <img src={logo} alt="Koff!" width="100px" />
+      <img src={logo} alt="Koff!" title="Koff!" width="100px" />
       {/* <div style={{ fontSize: "1.5em", marginBottom: "1em" }}>🍺</div> */}
       <h2>Statistics:</h2>
       <div className={classes.subHeader}>Times toasted:</div>
@@ -70,6 +70,10 @@ const Statistics = (props: Props) => {
       <div className={classes.subHeader}>Fridays hailed:</div>
       <div className={classes.number}>
         {!data ? <CircularProgress /> : data.fridayCount}
+      </div>
+      <div className={classes.subHeader}>Moments drunk:</div>
+      <div className={classes.number}>
+        {!data ? <CircularProgress /> : data.drunkCount}
       </div>
       <Box>
         <Button
