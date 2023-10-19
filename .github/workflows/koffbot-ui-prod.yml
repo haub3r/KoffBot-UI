@@ -1,0 +1,33 @@
+name: Build and deploy KoffBot UI to Azure
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy KoffBot UI
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Login via Azure CLI"
+        uses: azure/login@v1.4.0
+        with:
+          creds: "${{ secrets.AZURE_CREDENTIALS_PROD }}"
+
+      - name: "Checkout GitHub Action"
+        uses: actions/checkout@v4
+
+      - name: Upload to blob storage
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+              az storage blob upload-batch --account-name storageaccountkoffbab19 --auth-mode key -d '$web' -s .
+              
+      - name: Purge CDN endpoint
+        uses: azure/CLI@v1
+        with:
+          inlineScript: |
+             az cdn endpoint purge --content-paths  "/*" --profile-name "KoffBot" --name "https://KoffBot.azureedge.net" --resource-group "KoffBot"
+  
