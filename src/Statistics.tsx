@@ -65,15 +65,15 @@ const Statistics = (props: Props) => {
       <h2>Statistics:</h2>
       <div className={classes.subHeader}>Times toasted:</div>
       <div className={classes.number}>
-        {!data ? <CircularProgress /> : data.toastCount}
+        {!data ? <CircularProgress /> : data.ToastCount}
       </div>
       <div className={classes.subHeader}>Fridays hailed:</div>
       <div className={classes.number}>
-        {!data ? <CircularProgress /> : data.fridayCount}
+        {!data ? <CircularProgress /> : data.FridayCount}
       </div>
       <div className={classes.subHeader}>Moments drunk:</div>
       <div className={classes.number}>
-        {!data ? <CircularProgress /> : data.drunkCount}
+        {!data ? <CircularProgress /> : data.DrunkCount}
       </div>
       <Box>
         <Button

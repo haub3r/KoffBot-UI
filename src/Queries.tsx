@@ -2,14 +2,14 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { QueryFunction, QueryObserverResult, useQuery } from "react-query";
 
-export interface StatsDTO {
-  toastCount: number;
-  fridayCount: number;
-  drunkCount: number;
+export interface StatsDto {
+  ToastCount: number;
+  FridayCount: number;
+  DrunkCount: number;
 }
 
 export interface StatsQueryResults {
-  data: StatsDTO | undefined;
+  data: StatsDto | undefined;
   refetch: () => Promise<QueryObserverResult>;
 }
 
@@ -29,7 +29,7 @@ const QueryGetStats = (): StatsQueryResults => {
   return data;
 };
 
-const GetOnce = (callback: QueryFunction<StatsDTO>): StatsQueryResults => {
+const GetOnce = (callback: QueryFunction<StatsDto>): StatsQueryResults => {
   const [enabled, setEnabled] = useState(true);
 
   const { isLoading, data, refetch } = useQuery("statistics", callback, {
