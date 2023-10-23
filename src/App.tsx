@@ -1,5 +1,5 @@
 import { Button, makeStyles } from "@material-ui/core";
-import React, { useState } from "react";
+import { useState } from "react";
 import Statistics from "./Statistics";
 import Mousetrap from "mousetrap";
 import { QueryClient, QueryClientProvider } from "react-query";
