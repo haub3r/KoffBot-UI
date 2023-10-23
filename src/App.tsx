@@ -1,4 +1,5 @@
-import { Button, makeStyles } from "@material-ui/core";
+import { Button } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import { useState } from "react";
 import Statistics from "./Statistics";
 import Mousetrap from "mousetrap";
@@ -6,7 +7,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const useStyles = makeStyles((theme) => ({
   topButton: {
-    position: "absolute",
     right: "2em",
   },
   koffContainer: {
@@ -34,6 +34,7 @@ const App = () => {
       <div className={classes.koffContainer}>{koffString}</div>
       <Button
         className={classes.topButton}
+        style={{ position: "absolute" }}
         variant="contained"
         color="secondary"
         onClick={toggleDarkMode}

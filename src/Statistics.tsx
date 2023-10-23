@@ -1,11 +1,5 @@
-import {
-  Box,
-  Button,
-  CircularProgress,
-  Container,
-  makeStyles,
-  Theme,
-} from "@material-ui/core";
+import { Box, Button, CircularProgress, Container, Theme } from "@mui/material";
+import makeStyles from "@mui/styles/makeStyles";
 import logo from "./koff.png";
 import QueryGetStats, { StatsQueryResults } from "./Queries";
 
@@ -78,6 +72,7 @@ const Statistics = (props: Props) => {
       <Box>
         <Button
           className={classes.rowButton}
+          style={{ marginTop: "8em" }}
           variant="contained"
           color="primary"
           onClick={refresh}
