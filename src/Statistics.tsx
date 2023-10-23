@@ -43,9 +43,11 @@ const useStyles = makeStyles<Theme, Props>(() => ({
 const Statistics = (props: Props) => {
   const classes = useStyles(props);
 
-  const query = QueryGetStats() as StatsQueryResults;
-  const data = query.data;
-  const refetch = query.refetch;
+  const {
+    data: data,
+    refetch: refetch,
+    isFetching: isFetching,
+  } = QueryGetStats();
 
   const refresh = () => {
     refetch();
@@ -59,15 +61,15 @@ const Statistics = (props: Props) => {
       <h2>Statistics:</h2>
       <div className={classes.subHeader}>Times toasted:</div>
       <div className={classes.number}>
-        {!data ? <CircularProgress /> : data.ToastCount}
+        {!data || isFetching ? <CircularProgress /> : data.ToastCount}
       </div>
       <div className={classes.subHeader}>Fridays hailed:</div>
       <div className={classes.number}>
-        {!data ? <CircularProgress /> : data.FridayCount}
+        {!data || isFetching ? <CircularProgress /> : data.FridayCount}
       </div>
       <div className={classes.subHeader}>Moments drunk:</div>
       <div className={classes.number}>
-        {!data ? <CircularProgress /> : data.DrunkCount}
+        {!data || isFetching ? <CircularProgress /> : data.DrunkCount}
       </div>
       <Box>
         <Button

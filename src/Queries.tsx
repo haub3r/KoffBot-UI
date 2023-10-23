@@ -14,6 +14,7 @@ export interface StatsDto {
 
 export interface StatsQueryResults {
   data: StatsDto | undefined;
+  isFetching: boolean;
   refetch: () => Promise<QueryObserverResult>;
 }
 
@@ -36,7 +37,11 @@ const QueryGetStats = (): StatsQueryResults => {
 const GetOnce = (callback: QueryFunction<StatsDto>): StatsQueryResults => {
   const [enabled, setEnabled] = useState(true);
 
-  const { isLoading, data, refetch } = useQuery({
+  const {
+    data: data,
+    refetch: refetch,
+    isFetching: isFetching,
+  } = useQuery({
     enabled: enabled,
     queryFn: callback,
     queryKey: ["statistics"],
@@ -44,12 +49,12 @@ const GetOnce = (callback: QueryFunction<StatsDto>): StatsQueryResults => {
 
   useEffect(() => {
     // Check whether data exists.
-    if (!isLoading && !!data) {
+    if (!isFetching && !!data) {
       setEnabled(false);
     }
-  }, [data, isLoading]);
+  }, [data, isFetching]);
 
-  const results = { data: data, refetch: refetch };
+  const results = { data: data, isFetching: isFetching, refetch: refetch };
   return results;
 };
 
