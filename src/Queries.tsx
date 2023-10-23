@@ -7,9 +7,9 @@ import {
 } from "@tanstack/react-query";
 
 export interface StatsDto {
-  ToastCount: number;
-  FridayCount: number;
   DrunkCount: number;
+  FridayCount: number;
+  ToastCount: number;
 }
 
 export interface StatsQueryResults {

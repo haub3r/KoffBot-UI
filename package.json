@@ -15,8 +15,7 @@
     "react-dom": "^18.2.0",
     "typescript": "^5.2.2",
     "vite": "^4.5.0",
-    "vite-tsconfig-paths": "^4.2.1",
-    "web-vitals": "^3.5.0"
+    "vite-tsconfig-paths": "^4.2.1"
   },
   "scripts": {
     "start": "vite",
@@ -25,8 +24,7 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "react-app"
     ]
   },
   "browserslist": {
