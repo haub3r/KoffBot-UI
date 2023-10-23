@@ -2,7 +2,7 @@ import { Button, makeStyles } from "@material-ui/core";
 import { useState } from "react";
 import Statistics from "./Statistics";
 import Mousetrap from "mousetrap";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const useStyles = makeStyles((theme) => ({
   topButton: {

@@ -1,6 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { QueryFunction, QueryObserverResult, useQuery } from "react-query";
+import {
+  QueryFunction,
+  QueryObserverResult,
+  useQuery,
+} from "@tanstack/react-query";
 
 export interface StatsDto {
   ToastCount: number;
@@ -32,8 +36,10 @@ const QueryGetStats = (): StatsQueryResults => {
 const GetOnce = (callback: QueryFunction<StatsDto>): StatsQueryResults => {
   const [enabled, setEnabled] = useState(true);
 
-  const { isLoading, data, refetch } = useQuery("statistics", callback, {
+  const { isLoading, data, refetch } = useQuery({
     enabled: enabled,
+    queryFn: callback,
+    queryKey: ["statistics"],
   });
 
   useEffect(() => {
