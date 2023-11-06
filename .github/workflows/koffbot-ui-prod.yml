@@ -12,12 +12,12 @@ jobs:
 
     steps:
       - name: "Login via Azure CLI"
-        uses: azure/login@v1.4.0
+        uses: azure/login@master
         with:
           creds: "${{ secrets.AZURE_CREDENTIALS_PROD }}"
 
       - name: "Checkout GitHub Action"
-        uses: actions/checkout@v4
+        uses: actions/checkout@master
 
       - name: Install packages
         shell: bash
@@ -32,13 +32,13 @@ jobs:
           yarn build
 
       - name: Upload to blob storage
-        uses: azure/CLI@v1
+        uses: azure/CLI@master
         with:
           inlineScript: |
             az storage blob upload-batch --account-name storageaccountkoffbab19 --auth-mode key -d '$web' -s $GITHUB_WORKSPACE/dist --overwrite
 
       - name: Purge CDN endpoint
-        uses: azure/CLI@v1
+        uses: azure/CLI@master
         with:
           inlineScript: |
             az cdn endpoint purge --content-paths  "/*" --profile-name "KoffBot" --name "KoffBot" --resource-group "KoffBot"
